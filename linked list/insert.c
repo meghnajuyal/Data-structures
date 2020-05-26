@@ -43,16 +43,35 @@ void insert_head(int el)
 }
 void insert_mid(int el)
 {
-    struct node* temp=head;
-    int len=0;
-    while(temp!=NULL)
+    struct node* newnode=(struct node*)malloc(sizeof(struct node));
+    newnode->data=el;
+    newnode->next=NULL;
+
+    if(head==NULL)
+        head=tail=newnode;
+    else
     {
+       struct node* temp=head;
+       int len=0;
+       while(temp!=NULL)
+       {
         len++;
         temp=temp->next;
+        }
+
+       len/=2;
+       temp=head;
+       while(len>1)
+       {
+        temp=temp->next;
+        len--;
+
+       }
+       newnode->next=temp->next;
+       temp->next=newnode;
     }
 
 
-    printf("%d",temp->data);
 }
 void display()
 {
